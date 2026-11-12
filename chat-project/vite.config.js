@@ -8,5 +8,5 @@ export default defineConfig({
     react(),
     babel({ presets: [reactCompilerPreset()] })
   ],
-  base: '/react-chat/',
+  base: '/chat-project-react/',
 })
