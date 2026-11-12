@@ -1,0 +1,249 @@
+.form {
+    width: 100%;
+    max-width: 800px;
+    height: 80vh;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.message {
+    flex: 1;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 60px 10px 10px 10px;
+    overflow-y: auto;
+    background-color: var(--color-surface-alt);
+    background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%230077FF' stroke-width='1.5' stroke-opacity='0.15' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M30 30 Q40 10 50 30 T70 30'/%3E%3Cpath d='M150 40 l10-10 l10 10 l-10 10 z'/%3E%3Cpath d='M80 80 c-10-10-20 10 0 20 c20-10 10-30 0-20'/%3E%3Cpath d='M160 120 c10 20 20 -10 0 -20 c-20 10 -10 30 0 20'/%3E%3Ccircle cx='40' cy='150' r='10'/%3E%3Cpath d='M100 150 q15 -20 30 0'/%3E%3Cpath d='M170 170 l10-10 m-10 0 l10 10'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.message-item {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border-light);
+    border-radius: 20px;
+    padding: 10px 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    width: fit-content;
+    max-width: 85%;
+    transition: transform 0.1s, box-shadow 0.2s;
+    border-bottom-right-radius: 0px;
+}
+
+.message-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.message-meta {
+    display: block;
+    font-size: 12px;
+    color: var(--color-text-dark);
+    margin-bottom: 4px;
+}
+
+.message-text {
+    color: var(--color-message-text);
+    word-wrap: break-word;
+}
+
+.form-input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    outline: none;
+    font: inherit;
+    transition: all 0.2s ease-in-out;
+    font-size: 16px; /* перебиваю inherit против зума на айфоне */
+}
+
+.form-input:focus {
+    background-color: var(--color-surface);
+    border-color: var(--color-primary); 
+    box-shadow: 0 0 0 4px rgba(0, 119, 255, 0.15);
+}
+
+.sendbtn {
+    flex-shrink: 0;
+    width: 45px;
+    height: 45px;
+    padding: 0; 
+    border: none;
+    outline: none;
+    border-radius: 50%;
+    background-color: transparent;
+    color: var(--color-primary);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.sendbtn:hover {
+    background-color: var(--color-primary-light);
+    background-color: transparent;
+    transform: scale(1.2);
+}
+
+.sendbtn:active {
+    transform: scale(0.9);
+}
+
+.back-to-list-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+}
+
+.chat-top-actions {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 40px;
+    z-index: 10;
+}
+
+.chat-top-actions .search-container {
+    position: relative;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chat-top-actions .search-btn {
+    position: relative;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.chat-top-actions .burger-menu-wrapper {
+    position: relative;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+}
+
+.back-to-list-btn,
+.chat-top-actions .search-btn,
+.chat-top-actions .chat-burger-btn {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s;
+}
+
+.back-to-list-btn:hover,
+.chat-top-actions .search-btn:hover,
+.chat-top-actions .chat-burger-btn:hover {
+    color: var(--color-primary);
+    background-color: transparent;
+}
+
+.chat-top-actions .search-input {
+    position: absolute;
+    right: 45px;
+    top: 0;
+    height: 40px;
+    width: 0;
+    opacity: 0;
+    padding: 0 15px;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    outline: none;
+    font: inherit;
+    background-color: var(--color-surface);
+    transition: all 0.3s ease;
+    pointer-events: none;
+    box-sizing: border-box;
+}
+
+.chat-top-actions .search-container.active .search-input {
+    width: 200px;
+    opacity: 1;
+    border-color: var(--color-border-light);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    pointer-events: auto;
+}
+
+.chat-top-actions .dropdown-menu {
+    top: 45px;
+    right: 0;
+    left: auto;
+}
+
+#clear-chat-btn {
+    color: var(--color-danger);
+}
+
+#clear-chat-btn svg {
+    color: var(--color-danger);
+}
+
+#clear-chat-btn:hover {
+    background-color: var(--color-danger-bg);
+    color: var(--color-danger);
+}
+
+#clear-chat-btn:hover svg {
+    color: var(--color-danger);
+}
+
+@media (max-width: 600px) {
+    .form {
+        height: 100%;       /* Занимаем всю высоту */
+        max-height: 100%;   /* Сбрасываем ограничения */
+        width: 100%;        /* На всю ширину */
+        max-width: 100%;
+        border-radius: 0;   /* Убираем скругления (на телефоне они не нужны) */
+        border: none;       /* Убираем рамки */
+        box-shadow: none;   /* Убираем тень */
+        overflow: hidden;   /* чтобы форма не выталкивала экран */
+    }
+    
+    /* Чуть уменьшаем отступы, чтобы поместилось больше контента */
+    .message {
+        padding: 60px 5px 5px 5px; 
+    }
+}
