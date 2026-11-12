@@ -29,9 +29,11 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
+        working-directory: ./chat-project
         run: npm ci
 
       - name: Build
+        working-directory: ./chat-project
         run: npm run build
 
       - name: Setup Pages
@@ -40,7 +42,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: './chat-project/dist'
 
       - name: Deploy to GitHub Pages
         id: deployment
