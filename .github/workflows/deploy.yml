@@ -25,8 +25,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18
-          cache: 'npm'
+          node-version: 20
 
       - name: Install dependencies
         working-directory: ./chat-project
@@ -43,7 +42,6 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: './chat-project/dist'
-
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
