@@ -29,9 +29,8 @@ function DropdownMenu({ items, alignRight = false }) {
             </button>
 
             <div 
-                className={`dropdown-menu ${isOpen ? 'active' : ''}`} 
+                className={`dropdown-menu ${isOpen ? 'active' : ''} ${alignRight ? 'dropdown-menu-align' : ''}`} 
                 ref={menuRef}
-                style={alignRight ? { right: 0, left: 'auto' } : {}}
                 onClick={() => setIsOpen(false)}
             >
                 {items} 

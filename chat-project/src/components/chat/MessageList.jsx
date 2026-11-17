@@ -1,20 +1,14 @@
-import { useEffect, useRef } from 'react';
 import MessageItem from './MessageItem';
 
-function MessageList({ messages }) {
-    const bottomRef = useRef(null);
-
-    useEffect(() => {
-        bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, [messages]);
+function MessageList({ messages, containerRef }) {
 
     return (
-        <div className="message">
+        <div className="message" ref={containerRef}>
             {messages.map((msg, index) => (
                 <MessageItem key={index} {...msg} />
             ))}
-            <div ref={bottomRef} />
         </div>
     );
 }
+
 export default MessageList;

@@ -1,3 +1,5 @@
+import '../../styles/login.css';
+
 import { useState } from 'react';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';

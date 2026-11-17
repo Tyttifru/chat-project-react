@@ -1,29 +1,42 @@
 import { useState } from 'react';
 import { getRegisteredUsers, saveRegisteredUsers, saveCurrentUser } from '../../services/storage';
+import { useFormError } from '../ui/ErrorFuncs';
+import ErrorMessage from '../ui/ErrorMessage';
 
 function RegisterForm({ onSwitchToLogin, onSuccess }) {
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
+    const { error, showError, clearError, inputClass } = useFormError();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!name.trim() || !password.trim()) {
-            alert("Введите имя и пароль!");
+            showError('Введите имя и пароль');
             return;
         }
 
         const users = getRegisteredUsers();
 
         if (users[name]) {
-            alert("Пользователь с таким именем уже есть!");
+            showError("Пользователь с таким именем уже есть!");
             return;
         }
 
         users[name] = password;
         saveRegisteredUsers(users);
+        saveCurrentUser(name);
 
-        alert("Регистрация прошла успешно, добро пожаловать!");
         onSuccess();
+    };
+
+    const handleNameChange = (e) => {
+        setName(e.target.value);
+        if (error) clearError();
+    };
+
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+        if (error) clearError();
     };
 
     return (
@@ -32,21 +45,23 @@ function RegisterForm({ onSwitchToLogin, onSuccess }) {
                 <h2>Регистрация</h2>
                 
                 <input 
-                    className="author-input" 
+                    className={inputClass("author-input")} 
                     placeholder="Введите ваше имя" 
                     type="text"
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={handleNameChange}
                 />
                 
                 <input 
-                    className="password-input" 
+                    className={inputClass("password-input")} 
                     placeholder="Введите пароль" 
                     type="password"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={handlePasswordChange}
                 />
                 
+                <ErrorMessage>{error}</ErrorMessage>
+
                 <button className="addnewuser-btn" type="submit">Зарегистрироваться</button>
                 
                 <button 

@@ -289,6 +289,25 @@
     pointer-events: auto;
 }
 
+.chat-item, .back-to-list-btn, .vk-logo, .profile-icon-btn {
+    text-decoration: none;
+    color: inherit;
+}
+
+.chat-avatar {
+    background-color: #FFC107;
+}
+
+.chat-status {
+    color: #05b30d;
+    font-size: 14px;
+}
+
+.dropdown-menu-align {
+    right: 0;
+    left: auto;
+}
+
 @media (max-width: 600px) {
     .chat-list-box {
         height: 100%;       /* Занимаем всю высоту */

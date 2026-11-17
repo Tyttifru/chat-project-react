@@ -1,11 +1,37 @@
-import { useState } from 'react';
+import '../../styles/chat.css';
+
+import { useState, useRef, useEffect } from 'react';
 import { getMessages, saveMessages, clearMessagesStorage, getCurrentUser } from '../../services/storage';
 import ChatHeader from './ChatHeader';
 import MessageList from './MessageList';
 import MessageInput from './MessageInput';
 
-function ChatScreen({ onBack }) {
+function ChatScreen() {
     const [messages, setMessages] = useState(getMessages());
+    const chatContainerRef = useRef(null);
+
+    const scrollToBottom = () => {
+        if (chatContainerRef.current) {
+            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+        }
+    }
+
+    useEffect(() => {
+        scrollToBottom()
+    }, [])
+
+    /* чисто для проверки, что не скроллит на смс от собеседника
+    useEffect(() => {
+    window.__testAddMessage = (text, author = 'Вася') => {
+        setMessages(prev => [...prev, {
+            text,
+            author,
+            time: new Date().toISOString()
+        }]);
+    };
+    return () => { delete window.__testAddMessage; };
+    }, []);
+    */
 
     const handleSend = (text) => {
         const newMessage = {
@@ -17,6 +43,8 @@ function ChatScreen({ onBack }) {
         
         setMessages(updatedMessages);
         saveMessages(updatedMessages);
+
+        requestAnimationFrame(scrollToBottom);
     };
 
     const handleClear = () => {
@@ -29,8 +57,8 @@ function ChatScreen({ onBack }) {
     return (
         <div className="screen chat active" id="chat-screen">
             <form className="form" onSubmit={(e) => e.preventDefault()}>
-                <ChatHeader onBack={onBack} onClear={handleClear} />
-                <MessageList messages={messages} />
+                <ChatHeader onClear={handleClear} />
+                <MessageList containerRef={chatContainerRef} messages={messages} />
                 <MessageInput onSend={handleSend} />
             </form>
         </div>

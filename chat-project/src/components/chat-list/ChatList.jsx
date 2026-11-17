@@ -1,13 +1,12 @@
 import ChatListItem from './ChatListItem';
 
-function ChatList({ chats, onSelectChat }) {
+function ChatList({ chats }) {
     return (
         <div className="chat-list-container">
             {chats.map(chat => (
                 <ChatListItem 
                     key={chat.id} 
                     chat={chat} 
-                    onClick={onSelectChat} 
                 />
             ))}
         </div>

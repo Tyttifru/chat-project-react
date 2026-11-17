@@ -41,3 +41,14 @@ export function getCurrentScreen() {
 export function removeCurrentScreen() {
     localStorage.removeItem('currentScreen');
 }
+
+export function getUserProfile(username) {
+    const all = JSON.parse(localStorage.getItem('profiles') || '{}');
+    return all[username] || { firstName: username, lastName: '', age: '' };
+}
+
+export function saveUserProfile(username, profile) {
+    const all = JSON.parse(localStorage.getItem('profiles') || '{}');
+    all[username] = profile;
+    localStorage.setItem('profiles', JSON.stringify(all));
+}

@@ -1,63 +1,32 @@
-import { useState } from 'react';
-import { getCurrentUser, getCurrentScreen, saveCurrentScreen } from './services/storage';
-
 import './styles/base.css';
-import './styles/header.css';
-import './styles/login.css';
-import './styles/chat-list.css';
-import './styles/chat.css';
+
+import { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { getCurrentUser } from './services/storage';
 
 import Header from './components/ui/Header';
 import LoginScreen from './components/auth/LoginScreen';
 import ChatListScreen from './components/chat-list/ChatListScreen';
 import ChatScreen from './components/chat/ChatScreen';
+import ProfileScreen from './components/profile/ProfileScreen';
 
 function App() {
     
-    const [currentScreen, setCurrentScreen] = useState(() => {
-        if (getCurrentUser()) {
-            return getCurrentScreen() === 'chat' ? 'chat' : 'list';
-        }
-        return 'login';
-    });
-
-    const handleLogin = () => {
-        saveCurrentScreen('list');
-        setCurrentScreen('list');
-    };
-
-    const handleLogout = () => {
-        setCurrentScreen('login');
-    };
-
-    const handleSelectChat = () => {
-        saveCurrentScreen('chat');
-        setCurrentScreen('chat');
-    };
-
-    const handleBackToList = () => {
-        saveCurrentScreen('list');
-        setCurrentScreen('list');
-    };
+    const [isAuth, setisAuth] = useState(!!getCurrentUser()); 
 
     return (
-        <>
-            <Header currentScreen={currentScreen} onLogout={handleLogout} />
+        <Router basename='/chat-project-react'>
+            <Header isAuth={isAuth} onLogout={() => setisAuth(false)} />
 
-            {currentScreen === 'login' && (
-                <LoginScreen onLogin={handleLogin} />
-            )}
-
-            {currentScreen === 'list' && (
-                <ChatListScreen onSelectChat={handleSelectChat} />
-            )}
-
-            {currentScreen === 'chat' && (
-                <ChatScreen 
-                    onBack={handleBackToList} 
-                />
-            )}
-        </>
+                <Routes>
+                    <Route path="/login" element={!isAuth ? <LoginScreen onLogin={() => setisAuth(true)} /> : <Navigate to='/chat-list' /> } />
+                    <Route path="/" element={<Navigate to="/chat-list" replace />} />  
+                    <Route path="/chat-list" element={isAuth ? <ChatListScreen /> : <Navigate to="/login" />}/>              
+                    <Route path="/chat/:id" element={isAuth ? <ChatScreen /> : <Navigate to="/login" />} />
+                    <Route path="/profile" element={isAuth ? <ProfileScreen /> : <Navigate to="/login" />} />
+                    <Route path="*" element={<Navigate to={isAuth ? "/" : "/login"} />} />
+                </Routes>
+            </Router>
     );
 }
 

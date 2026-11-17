@@ -22,6 +22,7 @@
 
 .message {
     flex: 1;
+    min-height: 0;
     border: 1px solid var(--color-border);
     border-radius: 4px;
     padding: 60px 10px 10px 10px;
@@ -113,6 +114,8 @@
     top: 10px;
     left: 10px;
     z-index: 10;
+    color: var(--color-text-muted); 
+    text-decoration: none; 
 }
 
 .chat-top-actions {
@@ -228,6 +231,11 @@
 
 #clear-chat-btn:hover svg {
     color: var(--color-danger);
+}
+
+.chat-item, .vk-logo, .profile-icon-btn {
+    text-decoration: none;
+    color: inherit;
 }
 
 @media (max-width: 600px) {

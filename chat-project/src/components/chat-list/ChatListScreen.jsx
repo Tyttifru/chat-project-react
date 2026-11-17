@@ -1,9 +1,11 @@
+import '../../styles/chat-list.css';
+
 import { mockChats } from '../../services/mocks';
 import SearchBar from '../ui/SearchBar';
 import DropdownMenu from '../ui/DropdownMenu';
 import ChatList from './ChatList';
 
-function ChatListScreen({ onSelectChat }) {
+function ChatListScreen() {
     const menuItems = (
         <>
             <button className="dropdown-item" type="button">
@@ -25,8 +27,7 @@ function ChatListScreen({ onSelectChat }) {
                 <SearchBar placeholder="Поиск..." />
 
                 <ChatList 
-                    chats={mockChats} 
-                    onSelectChat={onSelectChat} 
+                    chats={mockChats}
                 />
 
                 <button className="fab-btn" type="button" title="Создать чат">

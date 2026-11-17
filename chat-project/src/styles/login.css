@@ -72,10 +72,10 @@
 }
 
 .flip-card {
-    perspective: 1000px; /* Глубина 3D-сцены */
+    perspective: 1000px;
     width: 100%;
     max-width: 380px;
-    height: 500px; /* Фиксированная высота для обеих форм */
+    height: 500px;
 }
 
 .flip-card-inner {
@@ -83,23 +83,42 @@
     width: 100%;
     height: 100%;
     transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-style: preserve-3d; /* Сохраняет 3D-пространство */
+    transform-style: preserve-3d;
 }
 
-/* Класс, который переворачивает карточку */
 .flip-card-inner.flipped {
     transform: rotateY(180deg);
 }
 
-/* Общие стили для обеих сторон */
 .flip-card-front, .flip-card-back {
     position: absolute;
     width: 100%;
     height: 100%;
-    backface-visibility: hidden; /* Скрывает обратную сторону */
+    backface-visibility: hidden;
 }
 
-/* Задняя сторона изначально повернута на 180 градусов */
 .flip-card-back {
     transform: rotateY(180deg);
+}
+
+.error-message {
+    color: var(--color-danger);
+    animation: shake 0.3s ease;
+    text-align: center;
+}
+
+.login-box input.input-error {
+    border-color: var(--color-danger);
+    background-color: var(--color-danger-bg);
+}
+
+.login-box input.input-error:focus {
+    border-color: var(--color-danger);
+    box-shadow: 0 0 0 4px rgba(211, 47, 47, 0.15);
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25%      { transform: translateX(-4px); }
+    75%      { transform: translateX(4px); }
 }
