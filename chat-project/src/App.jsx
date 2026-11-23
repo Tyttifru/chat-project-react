@@ -1,7 +1,7 @@
 import './styles/base.css';
 
 import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { getCurrentUser } from './services/storage';
 
 import Header from './components/ui/Header';
@@ -15,7 +15,7 @@ function App() {
     const [isAuth, setisAuth] = useState(!!getCurrentUser()); 
 
     return (
-        <Router basename='/chat-project-react'>
+        <Router>
             <Header isAuth={isAuth} onLogout={() => setisAuth(false)} />
 
                 <Routes>
